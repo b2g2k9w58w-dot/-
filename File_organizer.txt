@@ -1,0 +1,27 @@
+import os
+import shutil
+
+SOURCE_DIR = os.path.expanduser("~/Downloads")
+
+RULES = {
+    ".jpg": "Images", ".png": "Images", ".jpeg": "Images",
+    ".pdf": "Documents", ".docx": "Documents", ".txt": "Documents",
+    ".mp4": "Videos", ".mov": "Videos",
+    ".zip": "Archives", ".rar": "Archives"
+}
+
+def main():
+    print(f"Сортировка в: {SOURCE_DIR}")
+    for filename in os.listdir(SOURCE_DIR):
+        file_path = os.path.join(SOURCE_DIR, filename)
+        if os.path.isfile(file_path):
+            ext = os.path.splitext(filename)[1].lower()
+            if ext in RULES:
+                dest_dir = os.path.join(SOURCE_DIR, RULES[ext])
+                os.makedirs(dest_dir, exist_ok=True)
+                shutil.move(file_path, os.path.join(dest_dir, filename))
+                print(f"Перемещен: {filename}")
+    print("Готово!")
+
+if __name__ == "__main__":
+    main()
