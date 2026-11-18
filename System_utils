@@ -1,0 +1,6 @@
+#!/bin/bash
+TEMP_DIR="/tmp"
+DAYS=7
+echo "Очистка $TEMP_DIR (старше $DAYS дней)..."
+find "$TEMP_DIR" -type f -mtime +$DAYS -delete 2>/dev/null
+echo "Готово!"
